@@ -6,7 +6,6 @@ const User = require("../models/userModel");
 router.post("/login", async (req, res) => {
   try {
     const users = await User.find({ userName: req.body.userName });
-    console.log(users);
     if (users?.length > 0) {
       res.json({
         user : users[0],

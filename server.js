@@ -15,9 +15,11 @@ app.use(express.json(), corsIssue);
 
 const UserRouter = require("./routes/user");
 const AuthRouter = require("./routes/auth");
+const MastersRouter = require("./routes/masters");
 
-app.use("/user", UserRouter);
+app.use("/users", UserRouter);
 app.use("/auth", AuthRouter);
+app.use("/masters", MastersRouter);
 
 app.listen(process.env.PORT || 8888);
 

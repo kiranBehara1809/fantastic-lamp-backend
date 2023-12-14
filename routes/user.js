@@ -7,15 +7,15 @@ router.get("/all", async (req, res) => {
     const users = await User.find();
     if (users) {
       res.json({
-        users,
+        data : users,
         statusCode: 200,
         msg: "Fetched Succesfully",
         count: users.length || 0,
       });
     }
   } catch (e) {
-    res.status(500).json({
-      users: [],
+    res.json({
+      data: [],
       statusCode: 500,
       msg: "Problem occured while fetching users",
     });

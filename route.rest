@@ -8,3 +8,18 @@ Content-Type: application/json
 {
     "userName" : "behara.kiran"
 }
+
+###
+
+post http://localhost:8888/masters/bloodGroups/add
+Content-Type: application/json
+
+{
+    "completeName" : "A RhD positive",
+    "shortName" : "A+"
+}
+
+
+### 
+
+GET http://localhost:8888/masters/bloodGroups/all
