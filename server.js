@@ -1,24 +1,44 @@
-var express = require("express");
-const mongoose = require("mongoose");
+const express = require('express');
+const createError = require('http-errors');
+const dotenv = require('dotenv').config();
+
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/fantasticLamp");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const corsIssue = function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-};
-app.use(express.json(), corsIssue);
+// Initialize DB
+require('./initDB')();
 
-const UserRouter = require("./routes/user");
-const AuthRouter = require("./routes/auth");
+const ProductRoute = require('./Routes/Product.route');
+const UserRoute = require('./Routes/User.route');
+const AuthRoute = require('./Routes/Auth.route');
+const { API_VERSION } = require('./constants/general');
 
-app.use("/user", UserRouter);
-app.use("/auth", AuthRouter);
 
-app.listen(process.env.PORT || 8888);
+app.use(`${API_VERSION}/products`, ProductRoute);
+app.use(`${API_VERSION}/users`, UserRoute);
+app.use(`${API_VERSION}/auth`, AuthRoute);
 
-console.log(`Server is listening on ${process.env.PORT || 8888}`);
+
+//404 handler and pass to error handler
+app.use((req, res, next) => {
+  next(createError(404, 'Not found'));
+});
+
+//Error handler
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send({
+    error: {
+      status: err.status || 500,
+      message: err.message
+    }
+  });
+});
+
+const PORT = process.env.PORT || 8888;
+
+app.listen(PORT, () => {
+  console.log('Server started on port ' + PORT + '...');
+});
