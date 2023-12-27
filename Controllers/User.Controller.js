@@ -89,14 +89,12 @@ module.exports = {
       if (error instanceof mongoose.CastError) {
         return next(createError(400, "Invalid User Id"));
       }
-
       next(error);
     }
   },
 
   deleteUser: async (req, res, next) => {
     const id = req.params.id;
-    console.log(id);
     try {
       const result = await User.findByIdAndDelete(id);
       // console.log(result);
