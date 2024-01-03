@@ -30,7 +30,7 @@ module.exports = {
         next(createError(400, "Incorrect Password"));
       }
     } catch (e) {
-      console.log("Error while matching password --> ", e);
+      console.log("Error while login functionality --> ", e);
       next(createError(500, "Internal Server Error"));
     }
   },

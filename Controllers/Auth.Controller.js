@@ -2,7 +2,7 @@ const createError = require("http-errors");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const loggedInToken = require("../Models/loggedInToken.model");
-const User = require("../Models/User.model");
+const User = require("../Models/OurUsers.model");
 const { refreshTokenLogic, loginLogic } = require("../Core/Auth.Core");
 const jwt = require("jsonwebtoken");
 

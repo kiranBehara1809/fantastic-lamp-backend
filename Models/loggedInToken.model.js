@@ -4,13 +4,13 @@ const Schema = mongoose.Schema;
 const LoggedInTokensSchema = new Schema({
   userName: {
     type: String,
-    unique: true,
-    dropDups: true,
+    // unique: true,
+    // dropDups: true,
   },
   userId: {
     type: String,
-    unique: true,
-    dropDups: true,
+    // unique: true,
+    // dropDups: true,
   },
   token: {
     type: String,

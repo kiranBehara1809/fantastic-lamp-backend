@@ -1,13 +1,25 @@
 const createError = require("http-errors");
 const mongoose = require("mongoose");
 
-const User = require("../Models/User.model");
+const User = require("../Models/OurUsers.model");
+const UserRoleSchema = require("../Models/UserRole.model");
 const { getUniqueUserName, getInitalPassword } = require("../Core/User.Core");
 
 module.exports = {
+  getAllUserRoles: async (req, res, next) => {
+    try {
+      const results = await UserRoleSchema.find({}, { __v: 0, password: 0 });
+      // const results = await Product.find({}, { name: 1, price: 1, _id: 0 });
+      // const results = await Product.find({ price: 699 }, {});
+      res.send(results);
+    } catch (error) {
+      console.log(error.message);
+      next(createError(500, error.message));
+    }
+  },
   getAllUsers: async (req, res, next) => {
     try {
-      const results = await User.find({}, { __v: 0, password : 0 });
+      const results = await User.find({}, { __v: 0, password: 0 });
       // const results = await Product.find({}, { name: 1, price: 1, _id: 0 });
       // const results = await Product.find({ price: 699 }, {});
       res.send(results);
@@ -22,10 +34,10 @@ module.exports = {
       const userSchema = new User({
         ...req.body,
         userName: getUniqueUserName(req.body),
-        password: await getInitalPassword(req.body)
+        password: await getInitalPassword(req.body),
       });
       const result = await userSchema.save();
-      res.send({ ...result, password  : null});
+      res.send({ ...result, password: null });
     } catch (error) {
       console.log(error.message);
       if (error.name === "ValidationError") {

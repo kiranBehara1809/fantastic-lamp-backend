@@ -18,4 +18,7 @@ router.post("/update/:id", UserController.updateUser);
 //Delete a user by id
 router.post("/delete/:id", UserController.deleteUser);
 
+router.get("/roles/all", UserController.getAllUserRoles);
+
+
 module.exports = router;
