@@ -21,16 +21,16 @@ app.use(express.urlencoded({ extended: true }));
 // Initialize DB
 require("./initDB")();
 
-const ProductRoute = require("./Routes/Product.route");
 const UserRoute = require("./Routes/User.route");
 const MasterRoute = require("./Routes/Masters.route");
 const AuthRoute = require("./Routes/Auth.route");
+const OutPatientRoute = require("./Routes/OutPatient.route");
 const { API_VERSION } = require("./constants/general");
 
 
-app.use(`${API_VERSION}/products`, authenticateToken, ProductRoute);
 app.use(`${API_VERSION}/users`, authenticateToken, UserRoute);
 app.use(`${API_VERSION}/masters`, authenticateToken, MasterRoute);
+app.use(`${API_VERSION}/op`, authenticateToken, OutPatientRoute);
 app.use(`${API_VERSION}/auth`, AuthRoute);
 
 //404 handler and pass to error handler

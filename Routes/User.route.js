@@ -20,5 +20,7 @@ router.post("/delete/:id", UserController.deleteUser);
 
 router.get("/roles/all", UserController.getAllUserRoles);
 
+router.get("/currentUser", UserController.getCurrentUser);
+
 
 module.exports = router;

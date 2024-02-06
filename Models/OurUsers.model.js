@@ -48,6 +48,10 @@ const OurUserSchema = new Schema({
     default: true,
     required: false,
   },
+  isLocked : {
+    type : Boolean,
+    default : false
+  }
 });
 
 const OurUsers = mongoose.model("ourUsers", OurUserSchema);

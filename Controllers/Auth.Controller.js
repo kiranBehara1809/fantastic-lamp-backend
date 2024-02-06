@@ -79,7 +79,7 @@ module.exports = {
       if (!result) {
         throw createError(400, "Invalid Token");
       }
-      res.send({ msg : "logout successful"});
+      res.send({ msg: "logout successful" });
     } catch (error) {
       console.log(error.message);
       next(createError(500, error.message));

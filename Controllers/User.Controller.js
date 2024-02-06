@@ -123,4 +123,24 @@ module.exports = {
       next(error);
     }
   },
+  getCurrentUser: async (req, res, next) => {
+    try {
+      if (req.currentLoggedInUser) {
+        const user = await User.findOne(
+          { _id: req.currentLoggedInUser._id },
+          { __v: 0, password : 0}
+        );
+        res.send(user);
+        return;
+      } else {
+        next(createError(401, "Unauthorized request"));
+        return;
+      }
+    } catch (error) {
+      if (error instanceof mongoose.CastError) {
+        return next(createError(401, "Unauthorized request"));
+      }
+      next(error);
+    }
+  },
 };

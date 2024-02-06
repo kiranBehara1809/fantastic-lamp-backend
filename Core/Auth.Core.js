@@ -24,6 +24,7 @@ module.exports = {
         res.send({
           accessToken: accessToken,
           refreshToken: refreshToken,
+          user: { ...dbUser._doc, password: null },
           msg: "logged in succesfully",
         });
       } else {
@@ -65,6 +66,6 @@ module.exports = {
 
 const generateAccessToken = (obj) => {
   return jwt.sign(obj, process.env.ACCESS_TOKEN_S_KEY, {
-    expiresIn: '15m',
+    expiresIn: '30m',
   });
 };
