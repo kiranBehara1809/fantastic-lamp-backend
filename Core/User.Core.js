@@ -18,13 +18,11 @@ module.exports = {
       ...lastName.split(""),
       ...splittedUuid.split(""),
     ];
-    console.log("getUniqueUserName", getMultipleRandom(dicArr, 6));
     return getMultipleRandom(dicArr, 6);
   },
 
   getInitalPassword: async (payload) => {
     let { firstName } = payload;
-    console.log("getInitialPassword", firstName);
     const initialHashedPwd = await bcrypt.hash(firstName, 10);
     return initialHashedPwd;
   },
