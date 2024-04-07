@@ -48,10 +48,14 @@ const OurUserSchema = new Schema({
     default: true,
     required: false,
   },
-  isLocked : {
-    type : Boolean,
-    default : false
-  }
+  isLocked: {
+    type: Boolean,
+    default: false,
+  },
+  theme: {
+    type: String,
+    default: "greenTheme",
+  },
 });
 
 const OurUsers = mongoose.model("ourUsers", OurUserSchema);

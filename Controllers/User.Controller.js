@@ -95,7 +95,7 @@ module.exports = {
       if (!result) {
         throw createError(404, "User does not exist");
       }
-      res.send(result);
+      res.send({ ...result._doc, password: null });
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
@@ -128,7 +128,7 @@ module.exports = {
       if (req.currentLoggedInUser) {
         const user = await User.findOne(
           { _id: req.currentLoggedInUser._id },
-          { __v: 0, password : 0}
+          { __v: 0, password: 0 }
         );
         res.send(user);
         return;
